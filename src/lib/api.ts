@@ -27,7 +27,7 @@ export const api = async <TypeResponse>({
 
     if (withAuth) {
         /* Getting auth cookie */
-        const sessionAuth = cookies().get(process.env.NEXT_PUBLIC_AUTH_KEY as string)
+        const sessionAuth = cookies().get('access_token')
 
         if (sessionAuth?.value) {
             instance.defaults.headers.common['Authorization'] = `Bearer ${sessionAuth.value}`;

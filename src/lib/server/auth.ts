@@ -11,7 +11,7 @@ export const handleSignIn = async (data: SignInData) => {
 
     if (response.data) {
         cookies().set({
-            name: process.env.NEXT_PUBLIC_AUTH_KEY as string,
+            name: 'access_token',
             value: response.data.access_token,
             httpOnly: true,
             maxAge: 86400 * 7, // 7 days
@@ -26,7 +26,7 @@ export const handleSignUp = async (data: SignUpData) => {
 
     if (response.data) {
         cookies().set({
-            name: process.env.NEXT_PUBLIC_AUTH_KEY as string,
+            name: 'access_token',
             value: response.data.access_token,
             httpOnly: true,
             maxAge: 86400 * 7, // 7 days
@@ -38,7 +38,7 @@ export const handleSignUp = async (data: SignUpData) => {
 
 
 export const handleGetUser = async () => {
-    const authCookie = cookies().get(process.env.NEXT_PUBLIC_AUTH_KEY as string)?.value
+    const authCookie = cookies().get('access_token')?.value
 
     const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + '/api/v1/accounts/me', {
         headers: {
@@ -56,6 +56,6 @@ export const handleGetUser = async () => {
 }
 
 export const handleSignOut = () => {
-    cookies().delete(process.env.NEXT_PUBLIC_AUTH_KEY as string)
+    cookies().delete('access_token')
     redirect('/auth/signin')
 }
