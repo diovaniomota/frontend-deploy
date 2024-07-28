@@ -1,4 +1,15 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+const isProd = process.env.NODE_ENV === 'production';
 
-export default nextConfig;
+module.exports = {
+  reactStrictMode: true,
+  images: {
+    domains: ['127.0.0.1'],
+  },
+  exportTrailingSlash: true,
+  exportPathMap: async function (
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId }
+  ) {
+    return defaultPathMap;
+  },
+};
